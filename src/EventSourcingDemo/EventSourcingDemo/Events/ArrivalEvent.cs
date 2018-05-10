@@ -6,7 +6,7 @@ namespace EventSourcingDemo.Events
     {
         public ArrivalEvent(DateTime dateTime, Port sfo, Ship kr)
         {
-            throw new NotImplementedException();
+            kr.Port = sfo;
         }
     }
 }

@@ -5,6 +5,7 @@ using NUnit.Framework;
 
 namespace EventSourcingDemo.Test
 {
+    [TestFixture]
     public class Tester
     {
         private Ship kr;
@@ -31,6 +32,7 @@ namespace EventSourcingDemo.Test
             Assert.AreEqual(sfo,kr.Port);
         }
 
+        [Test]
         public void DeparturePutsShipOutToSea()
         {
             eProc.Process(new ArrivalEvent(new DateTime(2005,10,1),la,kr));

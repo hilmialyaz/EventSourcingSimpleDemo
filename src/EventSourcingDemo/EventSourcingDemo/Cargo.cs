@@ -4,7 +4,7 @@
     {
         public Cargo(string refactoring)
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }

@@ -9,7 +9,7 @@ namespace EventSourcingDemo
         IList log = new ArrayList();
         public void Process(ArrivalEvent ev)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void Process(DomainEvent e)
