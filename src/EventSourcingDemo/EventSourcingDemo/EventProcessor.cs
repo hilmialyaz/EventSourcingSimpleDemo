@@ -9,7 +9,7 @@ namespace EventSourcingDemo
         IList log = new ArrayList();
         public void Process(ArrivalEvent ev)
         {
-            
+            ev.Ship.Port = ev.Port;
         }
 
         public void Process(DomainEvent e)

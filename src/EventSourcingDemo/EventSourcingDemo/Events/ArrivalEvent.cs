@@ -2,11 +2,21 @@
 
 namespace EventSourcingDemo.Events
 {
-    public class ArrivalEvent
+    public class ArrivalEvent : DomainEvent
     {
-        public ArrivalEvent(DateTime dateTime, Port sfo, Ship kr)
+        public ArrivalEvent(DateTime occurred, Port port, Ship ship):base(occurred)
         {
-            kr.Port = sfo;
+            this.Port = port;
+            this.Ship = ship;
+        }
+
+        internal Port Port { get; }
+
+        internal Ship Ship { get; }
+
+        internal override void Process()
+        {
+            Ship.HandleArrival(this);
         }
     }
 }

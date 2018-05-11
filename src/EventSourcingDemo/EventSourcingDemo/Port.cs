@@ -13,5 +13,7 @@ namespace EventSourcingDemo
             this.v = v;
             this.uS = uS;
         }
+
+        public Country Country { get; set; }
     }
 }

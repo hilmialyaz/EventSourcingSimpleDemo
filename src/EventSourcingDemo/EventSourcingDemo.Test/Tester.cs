@@ -37,8 +37,19 @@ namespace EventSourcingDemo.Test
         {
             eProc.Process(new ArrivalEvent(new DateTime(2005,10,1),la,kr));
             eProc.Process(new ArrivalEvent(new DateTime(2005,11,1),sfo,kr));
-            eProc.Process(new ArrivalEvent(new DateTime(2005,11,1),sfo,kr));
+            eProc.Process(new DepartureEvent(new DateTime(2005,11,1),sfo,kr));
             Assert.AreEqual(Port.AT_SEA,kr.Port);
+        }
+
+        [Test]
+        public void VisitingCanadaMarksCargo()
+        {
+          eProc.Process(new LoadEvent(new DateTime(2005,11,1),refact,kr));
+          eProc.Process(new ArrivalEvent(new DateTime(2005,11,2),yyv,kr));
+          eProc.Process(new DepartureEvent(new DateTime(2005,11,3),yyv,kr));
+          eProc.Process(new ArrivalEvent(new DateTime(2005,11,4),sfo,kr));
+          eProc.Process(new UnloadEvent(new DateTime(2005,11,5),refact,kr));
+          Assert.IsTrue(refact.HasBeenInCanda);
         }
     }
 }

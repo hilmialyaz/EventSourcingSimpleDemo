@@ -9,7 +9,7 @@ namespace EventSourcingDemo.Events
         internal Port Port { get { return _port; } }
         internal Ship Ship { get { return _ship; } }
 
-        internal DepartureEvent(DateTime time, Port port, Ship ship) : base(time)
+        public DepartureEvent(DateTime time, Port port, Ship ship) : base(time)
         {
             _port = port;
             _ship = ship;
