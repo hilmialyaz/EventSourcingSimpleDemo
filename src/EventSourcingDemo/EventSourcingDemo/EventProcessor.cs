@@ -7,6 +7,8 @@ namespace EventSourcingDemo
     public class EventProcessor
     {
         IList log = new ArrayList();
+        public bool isActive;
+
         public void Process(ArrivalEvent ev)
         {
             ev.Ship.Port = ev.Port;
@@ -14,7 +16,9 @@ namespace EventSourcingDemo
 
         public void Process(DomainEvent e)
         {
+            isActive = true;
             e.Process();
+            isActive = false;
             log.Add(e);
         }
     }

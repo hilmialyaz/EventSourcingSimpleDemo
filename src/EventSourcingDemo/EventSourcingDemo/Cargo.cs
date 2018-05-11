@@ -5,17 +5,47 @@ namespace EventSourcingDemo
 {
     public class Cargo
     {
+        private Port _port;
+        private Ship _ship;
+
         public Cargo(string refactoring)
         {
             
         }
 
-        public bool HasBeenInCanda { get; set; }
+        private bool _hasBeenInCanada = false;
+        public bool HasBeenInCanda { get { return _hasBeenInCanada; } }
 
         public void HandleArrival(ArrivalEvent ev)
         {
-            if (Country.CANADA == ev.Port.Country)
-                HasBeenInCanda = true;
+            ev.priorCargoInCanada[this] = _hasBeenInCanada;
+            if ("CA" == ev.Port.Country)
+                _hasBeenInCanada = true;
+        }
+
+        public void HandleLoad(LoadEvent loadEvent)
+        {
+            loadEvent.priorPort = _port;
+            _port = null;
+            _ship = loadEvent.Ship;
+            _ship.HandleLoad(loadEvent);
+        }
+
+        public void ReverseLoad(LoadEvent loadEvent)
+        {
+            _ship.ReverseLoad(loadEvent);
+            _ship = null;
+            _port = loadEvent.priorPort;
+        }
+
+        public Cargo Find(string cargoCode)
+        {
+            return new Cargo(cargoCode);
+        }
+
+        public void ReverserArrival(ArrivalEvent ev)
+        {
+            _hasBeenInCanada = (bool) ev.priorCargoInCanada[this];
         }
     }
 }

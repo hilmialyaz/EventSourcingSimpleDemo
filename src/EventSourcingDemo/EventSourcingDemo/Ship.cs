@@ -28,5 +28,19 @@ namespace EventSourcingDemo
                 c.HandleArrival(ev);
             }
         }
+
+        public Ship Find(int shipCode)
+        {
+            return new Ship(shipCode.ToString());
+        }
+
+        public void HandleLoad(LoadEvent loadEvent)
+        {
+           
+        }
+
+        public void ReverseLoad(LoadEvent loadEvent)
+        {
+        }
     }
 }

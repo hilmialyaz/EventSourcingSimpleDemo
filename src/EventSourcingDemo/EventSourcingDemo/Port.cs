@@ -1,4 +1,6 @@
 ﻿using EventSourcingDemo.Enums;
+using EventSourcingDemo.Events;
+using EventSourcingDemo.Gateway;
 
 namespace EventSourcingDemo
 {
@@ -14,6 +16,17 @@ namespace EventSourcingDemo
             this.uS = uS;
         }
 
-        public Country Country { get; set; }
+        public string Country{ get; set; }
+
+        public void HandleArrival(ArrivalEvent ev)
+        {
+            ev.Ship.Port = this;
+            Registry.CustomsNotificationGateway.Notify(ev.Occurred, ev.Ship, ev.Port);
+        }
+    }
+
+    public class Registry
+    {
+        public static CustomsNotificationGateway CustomsNotificationGateway { get; set; }
     }
 }

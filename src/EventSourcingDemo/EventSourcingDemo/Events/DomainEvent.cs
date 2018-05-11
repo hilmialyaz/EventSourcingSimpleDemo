@@ -13,5 +13,6 @@ namespace EventSourcingDemo.Events
         }
 
         internal abstract void Process();
+        internal abstract void Reverse();
     }
 }
