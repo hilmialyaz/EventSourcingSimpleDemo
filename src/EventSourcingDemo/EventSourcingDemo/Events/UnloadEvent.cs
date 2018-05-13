@@ -6,10 +6,15 @@ namespace EventSourcingDemo.Events
     {
         public UnloadEvent(DateTime dateTime, Cargo refact, Ship kr):base(dateTime)
         {
-            refact.HasBeenInCanda = true;
+          
         }
 
         internal override void Process()
+        {
+           
+        }
+
+        internal override void Reverse()
         {
            
         }

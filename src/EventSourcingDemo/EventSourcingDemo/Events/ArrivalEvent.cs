@@ -24,5 +24,10 @@ namespace EventSourcingDemo.Events
         {
             Ship.HandleArrival(this);
         }
+
+        internal override void Reverse()
+        {
+            
+        }
     }
 }

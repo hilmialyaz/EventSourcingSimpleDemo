@@ -14,13 +14,16 @@ namespace EventSourcingDemo
         }
 
         private bool _hasBeenInCanada = false;
+        private object declaredValue;
         public bool HasBeenInCanda { get { return _hasBeenInCanada; } }
+        public object RegistrationCode { get; set; }
 
         public void HandleArrival(ArrivalEvent ev)
         {
             ev.priorCargoInCanada[this] = _hasBeenInCanada;
             if ("CA" == ev.Port.Country)
                 _hasBeenInCanada = true;
+             declaredValue = Registry.PricingGateway.GetPrice(this);
         }
 
         public void HandleLoad(LoadEvent loadEvent)

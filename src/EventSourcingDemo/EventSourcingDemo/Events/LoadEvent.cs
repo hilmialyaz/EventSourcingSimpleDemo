@@ -7,6 +7,8 @@ namespace EventSourcingDemo.Events
         private int _shipCode;
         private string _cargoCode;
         public Port priorPort;
+        private Port _port;
+        private Ship _ship;
 
         public LoadEvent(DateTime dateTime, Cargo refact, Ship kr) : base(dateTime)
         {
@@ -30,6 +32,14 @@ namespace EventSourcingDemo.Events
         internal override void Reverse()
         {
             Cargo.ReverseLoad(this);
+        }
+
+        internal void HandleLoad(LoadEvent ev)
+        {
+            ev.priorPort = _port;
+            _port = null;
+            _ship = ev.Ship;
+            _ship.HandleLoad(ev);
         }
     }
 }
